@@ -1,7 +1,4 @@
-from app.routes import create_app
-from app.config import Base, engine
-
-Base.metadata.create_all(engine)
+from app import create_app
 
 app = create_app()
 
