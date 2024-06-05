@@ -6,8 +6,11 @@ from .reservation import reservation_bp
 from .restaurant import restaurant_bp
 from .table import table_bp
 
+from flask_cors import CORS
+
 def create_app():
     app = Flask(__name__)
+    CORS(app)
 
     # Register blueprints
     app.register_blueprint(auth_bp, url_prefix='/api')

@@ -34,13 +34,14 @@ def token_required(f):
 @auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
+    print(data)
     hashed_password = generate_password_hash(data['password'], method='pbkdf2:sha256')
     session = Session()
     new_user = User(
-        nama=data['nama'],
+        nama=data['name'],
         email=data['email'],
-        nomor_telepon=data['nomor_telepon'],
-        alamat=data['alamat'],
+        nomor_telepon=data['phone'],
+        alamat=data['address'],
         password=hashed_password
     )
     session.add(new_user)
@@ -60,4 +61,5 @@ def login():
     token = jwt.encode({'user_id': user.user_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)},
                        SECRET_KEY, algorithm="HS256")
     session.close()
+    print(token)
     return jsonify({'token': token})
