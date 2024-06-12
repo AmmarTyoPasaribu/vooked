@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+import Appnavbar from '../compunents/navbar';
 
 const Signin = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,7 @@ const Signin = () => {
   });
 
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,10 +29,12 @@ const Signin = () => {
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/login', formData);
       if (response.status === 200) {
-        console.log(response.data);
-        setMessage('Signup successful!');
+        const token = response.data.token;
+        localStorage.setItem('jwtToken', token);
+        setMessage('Signin successful!');
+        navigate('/');
       } else {
-        setMessage('Signup failed. Please try again.');
+        setMessage('Signin failed. Please try again.');
       }
     } catch (error) {
       setMessage('An error occurred. Please try again.');
@@ -38,8 +43,9 @@ const Signin = () => {
 
   return (
     <div>
-      <Card border="primary" style={{ width: '25rem', margin: 'auto'}}>
-        <Card.Header>Sign Up</Card.Header>
+      <Appnavbar />
+      <Card border="primary" style={{ width: '25rem', margin: 'auto' }}>
+        <Card.Header>Sign In</Card.Header>
         <Card.Body>
           <Card.Title>Primary Card Title</Card.Title>
           <form onSubmit={handleSubmit}>
