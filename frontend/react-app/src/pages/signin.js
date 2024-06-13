@@ -30,6 +30,7 @@ const Signin = () => {
       const response = await axios.post('http://127.0.0.1:5000/api/login', formData);
       if (response.status === 200) {
         const token = response.data.token;
+        
         localStorage.setItem('jwtToken', token);
         setMessage('Signin successful!');
         navigate('/');

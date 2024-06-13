@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 import datetime
@@ -9,7 +9,6 @@ from .models import User
 auth_bp = Blueprint('auth', __name__)
 
 SECRET_KEY = "super_secret"
-
 
 def token_required(f):
     @wraps(f)
@@ -24,8 +23,10 @@ def token_required(f):
             session = Session()
             current_user = session.query(User).filter_by(user_id=data['user_id']).first()
             session.close()
-        except:
-            return jsonify({'message': 'Token is invalid!'}), 401
+        except jwt.ExpiredSignatureError:
+            return jsonify({'message': 'Token is expired!'}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({'message': 'Invalid token!'}), 401
         return f(current_user, *args, **kwargs)
 
     return decorated
@@ -34,7 +35,6 @@ def token_required(f):
 @auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    print(data)
     hashed_password = generate_password_hash(data['password'], method='pbkdf2:sha256')
     session = Session()
     new_user = User(
@@ -49,7 +49,6 @@ def register():
     session.close()
     return jsonify({'message': 'New user created!'})
 
-
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -63,3 +62,10 @@ def login():
     session.close()
     print(token)
     return jsonify({'token': token})
+
+
+@auth_bp.route('/logout', methods=['POST'])
+@token_required
+def logout(current_user):
+    session.pop('user_id', None)  # Hapus user_id dari session
+    return jsonify({'message': 'Successfully logged out.'}), 200
