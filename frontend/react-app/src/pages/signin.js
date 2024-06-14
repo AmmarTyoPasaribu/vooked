@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import Appnavbar from '../compunents/navbar';
 
 const Signin = () => {
   const [formData, setFormData] = useState({
@@ -44,7 +43,6 @@ const Signin = () => {
 
   return (
     <div>
-      <Appnavbar />
       <Card border="primary" style={{ width: '25rem', margin: 'auto' }}>
         <Card.Header>Sign In</Card.Header>
         <Card.Body>
