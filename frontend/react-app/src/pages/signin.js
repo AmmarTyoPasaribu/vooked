@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+import { useNavigate, Link } from 'react-router-dom';
+import "../distcss/signin.css";
 
-const Signin = () => {
+const SignIn = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -29,7 +26,6 @@ const Signin = () => {
       const response = await axios.post('http://127.0.0.1:5000/api/login', formData);
       if (response.status === 200) {
         const token = response.data.token;
-        
         localStorage.setItem('jwtToken', token);
         setMessage('Signin successful!');
         navigate('/');
@@ -42,39 +38,44 @@ const Signin = () => {
   };
 
   return (
-    <div>
-      <Card border="primary" style={{ width: '25rem', margin: 'auto' }}>
-        <Card.Header>Sign In</Card.Header>
-        <Card.Body>
-          <Card.Title>Primary Card Title</Card.Title>
-          <form onSubmit={handleSubmit}>
-            <FloatingLabel controlId="email" label="Email" className="mb-3">
-              <Form.Control 
-                type="email" 
-                placeholder="name@example.com" 
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </FloatingLabel>
-            <FloatingLabel controlId="password" label="Password">
-              <Form.Control 
-                type="password" 
-                placeholder="Password" 
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-            </FloatingLabel>
-            <Button type="submit" variant="primary">Primary</Button>{' '}
-            {message && <p>{message}</p>}
-          </form>
-        </Card.Body>
-      </Card>
+    <div className="sign-in">
+      <div className="content">
+        <div className="title">Login</div>
+        <form onSubmit={handleSubmit}>
+          <div className="email-input">
+            <label className="label">Email</label>
+            <input 
+              type="email" 
+              className="input" 
+              placeholder="Enter your Email here" 
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="password-input">
+            <label className="label">Password</label>
+            <input 
+              type="password" 
+              className="input" 
+              placeholder="Enter your Password here" 
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit" className="login-button">Login</button>
+          {message && <p>{message}</p>}
+        </form>
+        <div className="create-account">
+          <span>Create An Account </span>
+          <Link to="/signup" className="sign-up-link">Sign Up</Link>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Signin;
+export default SignIn;
