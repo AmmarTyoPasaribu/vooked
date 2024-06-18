@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Logo from './logo';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import "../distcss/navbar.css";
 const Appnavbar = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Appnavbar = () => {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
+      <Navbar style={{ backgroundColor: 'orange', marginBottom: '15px' }}>
         <Container>
           <Navbar.Brand href="#home">
             <Logo />
