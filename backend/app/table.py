@@ -80,3 +80,17 @@ def get_tables(current_user):
         'nomor_meja': table.nomor_meja,
         'kapasitas': table.kapasitas
     } for table in tables])
+
+
+@table_bp.route('/tableresto/<int:restaurant_id>', methods=['GET'])
+@token_required
+def get_tables_by_restaurant(current_user, restaurant_id):
+    session = Session()
+    tables = session.query(Table).filter_by(restaurant_id=restaurant_id).all()
+    session.close()
+    return jsonify([{
+        'table_id': table.table_id,
+        'restaurant_id': table.restaurant_id,
+        'nomor_meja': table.nomor_meja,
+        'kapasitas': table.kapasitas
+    } for table in tables])
