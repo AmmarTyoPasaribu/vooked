@@ -8,8 +8,8 @@ import image2 from './2.jpeg';
 import image3 from './3.jpeg';
 import image4 from './4.jpeg';
 import image5 from './11.png';
-import { Navigate, useNavigate } from 'react-router-dom';
 import '../distcss/home.css'; // Tambahkan ini di bagian atas file
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -49,6 +49,31 @@ const Home = () => {
       }
     } catch (error) {
       console.error('Fetch user failed!', error);
+    }
+  };
+
+  const handleTable = (restaurant_id) => {
+    try {
+      navigate(`/tables/${restaurant_id}`);
+    } catch (error) {
+      console.error('Table failed!', error);
+    }
+  };
+
+  const fetchUserName = async (e) => {
+    try {
+      const response = await axios.get('http://127.0.0.1:5000/api/user', {
+        headers: {
+          'x-access-token': localStorage.getItem('jwtToken'),
+        }
+      });
+
+      if (response.status === 200) {
+        setUser(response.data.user.name);
+      } else {
+        
+      }
+    } catch (error) {
     }
   };
 
