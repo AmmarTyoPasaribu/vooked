@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+import { useNavigate, Link } from 'react-router-dom';
+import "../distcss/signup.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +13,7 @@ const Signup = () => {
   });
 
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,6 +30,7 @@ const Signup = () => {
       if (response.status === 200) {
         console.log(response.data);
         setMessage('Signup successful!');
+        navigate('/signin'); 
       } else {
         setMessage('Signup failed. Please try again.');
       }
@@ -40,67 +40,73 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <Card border="primary" style={{ width: '25rem', margin: 'auto'}}>
-        <Card.Header>Sign Up</Card.Header>
-        <Card.Body>
-          <Card.Title>Primary Card Title</Card.Title>
-          <form onSubmit={handleSubmit}>
-            <FloatingLabel controlId="name" label="Name" className="mb-3">
-              <Form.Control 
-                type="text" 
-                placeholder="name" 
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
-            </FloatingLabel>
-            <FloatingLabel controlId="email" label="Email" className="mb-3">
-              <Form.Control 
-                type="email" 
-                placeholder="name@example.com" 
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </FloatingLabel>
-            <FloatingLabel controlId="phone" label="Phone" className="mb-3">
-              <Form.Control 
-                type="phone" 
-                placeholder="phone" 
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-              />
-            </FloatingLabel>
-            <FloatingLabel controlId="address" label="Address" className="mb-3">
-              <Form.Control 
-                type="address" 
-                placeholder="address" 
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                required
-              />
-            </FloatingLabel>
-            <FloatingLabel controlId="password" label="Password">
-              <Form.Control 
-                type="password" 
-                placeholder="Password" 
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-            </FloatingLabel>
-            <Button type="submit" variant="primary">Primary</Button>{' '}
-            {message && <p>{message}</p>}
-          </form>
-        </Card.Body>
-      </Card>
+    <div className="register-container">
+      <div className="register-form">
+        <h2>Create your Account</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Full Name</label>
+            <input 
+              type="text" 
+              placeholder="Enter your Full Name here" 
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required 
+            />
+          </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input 
+              type="email" 
+              placeholder="Enter your Email here" 
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required 
+            />
+          </div>
+          <div className="form-group">
+            <label>Password</label>
+            <input 
+              type="password" 
+              placeholder="Enter your Password here" 
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required 
+            />
+          </div>
+          <div className="form-group">
+            <label>Phone Number</label>
+            <input 
+              type="text" 
+              placeholder="Enter your Phone Number here" 
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required 
+            />
+          </div>
+          <div className="form-group">
+            <label>Address</label>
+            <input 
+              type="text" 
+              placeholder="Enter your Address here" 
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required 
+            />
+          </div>
+          <button type="submit" className="create-account-button">Create Account</button>
+          {message && <p>{message}</p>}
+        </form>
+        <div className="login-link">
+          <span>I Already Have An Account </span>
+          <Link to="/signin">Login</Link>
+        </div>
+      </div>
     </div>
   );
 };

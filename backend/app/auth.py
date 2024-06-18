@@ -61,7 +61,7 @@ def login():
                        SECRET_KEY, algorithm="HS256")
     session.close()
     print(token)
-    return jsonify({'token': token})
+    return jsonify({'token': token.decode('utf-8')})
 
 
 @auth_bp.route('/logout', methods=['POST'])
