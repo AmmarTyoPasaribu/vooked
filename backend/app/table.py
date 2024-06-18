@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from .config import Session
 from .models import Table
+from .models import Reservation
 from .auth import token_required
 
 table_bp = Blueprint('table', __name__)
@@ -94,3 +95,15 @@ def get_tables_by_restaurant(current_user, restaurant_id):
         'nomor_meja': table.nomor_meja,
         'kapasitas': table.kapasitas
     } for table in tables])
+
+
+@table_bp.route('tablestatus/<int:table_id>', method=['GET'])
+@token_required
+def get_table_status(current_user, table_id):
+    session = Session()
+    table = session.query(Reservation).filter_by(table_id=table_id).all()
+    session.close()
+    if len(table) == 0:
+        return 0
+    else:
+        return 1

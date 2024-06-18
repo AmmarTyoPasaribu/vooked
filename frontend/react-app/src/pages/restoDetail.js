@@ -11,7 +11,7 @@ const Tables = () => {
   useEffect(() => {
 
     fetchTable();
-  }, []); 
+  }); 
 
   const fetchTable = async (e) => {
     try {

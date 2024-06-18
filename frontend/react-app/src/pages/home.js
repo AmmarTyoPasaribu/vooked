@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Appnavbar from '../compunents/navbar';
 import Table from 'react-bootstrap/Table';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
