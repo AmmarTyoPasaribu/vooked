@@ -56,8 +56,7 @@ def delete_restaurant(current_user, restaurant_id):
 
 
 @restaurant_bp.route('/restaurant', methods=['GET'])
-@token_required
-def get_restaurants(curent_user):
+def get_restaurants():
     session = Session()
     restaurants = session.query(Restaurant).all()
     result = [{
