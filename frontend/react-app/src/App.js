@@ -4,6 +4,7 @@ import Signup from './pages/signup';
 import Signin from './pages/signin';
 import Home from './pages/home';
 import Tables from './pages/restoDetail';
+import Tab from './pages/booking';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/tables/:resto_id" element={<Tables />} />
+          <Route path="/table/:resto_id/:table_id" element={<Tab />} />
         </Routes>
       </div>
     </Router>

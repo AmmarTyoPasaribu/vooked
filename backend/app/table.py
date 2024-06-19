@@ -97,13 +97,28 @@ def get_tables_by_restaurant(current_user, restaurant_id):
     } for table in tables])
 
 
-@table_bp.route('tablestatus/<int:table_id>', method=['GET'])
+@table_bp.route('/table/<int:restaurant_id>/<int:table_id>', methods=['GET'])
 @token_required
-def get_table_status(current_user, table_id):
+def get_table_detail(current_user, restaurant_id, table_id):
     session = Session()
-    table = session.query(Reservation).filter_by(table_id=table_id).all()
+    table = session.query(Table).filter_by(restaurant_id=restaurant_id, table_id=table_id).first()
+    session.close()
+    return jsonify({
+        'table_id': table.table_id,
+        'restaurant_id': table.restaurant_id,
+        'nomor_meja': table.nomor_meja,
+        'kapasitas': table.kapasitas
+    })
+
+
+@table_bp.route('tablestatus/<int:restaurant_id>/<int:table_id>', methods=['GET'])
+@token_required
+def get_table_status(current_user, restaurant_id, table_id):
+    session = Session()
+    table = session.query(Reservation).filter_by(restaurant_id=restaurant_id, table_id=table_id).all()
+    print(table)
     session.close()
     if len(table) == 0:
-        return 0
+        return '0'
     else:
-        return 1
+        return '1'

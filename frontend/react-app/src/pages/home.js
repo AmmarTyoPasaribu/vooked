@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Appnavbar from '../compunents/navbar';
-<<<<<<< HEAD
-import Table from 'react-bootstrap/Table';
 import { useNavigate } from 'react-router-dom';
-=======
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import image1 from './1.jpeg';
@@ -13,8 +10,6 @@ import image3 from './3.jpeg';
 import image4 from './4.jpeg';
 import image5 from './11.png';
 import '../distcss/home.css'; // Tambahkan ini di bagian atas file
-import { Navigate, useNavigate } from 'react-router-dom';
->>>>>>> 86f3d9e760f55cfff50fde7cb3f06a07550ad09a
 
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -65,30 +60,6 @@ const Home = () => {
     }
   };
 
-  const fetchUserName = async (e) => {
-    try {
-      const response = await axios.get('http://127.0.0.1:5000/api/user', {
-        headers: {
-          'x-access-token': localStorage.getItem('jwtToken'),
-        }
-      });
-
-      if (response.status === 200) {
-        setUser(response.data.user.name);
-      } else {
-        
-      }
-    } catch (error) {
-    }
-  };
-
-  const handleTable = (restaurant_id) => {
-    try {
-      navigate(`/tables/${restaurant_id}`);
-    } catch (error) {
-      console.error('Table failed!', error);
-    }
-  };
   
   return (
     <div>
@@ -114,7 +85,7 @@ const Home = () => {
         ))}
       </div>
       <footer style={{ position: 'fixed', bottom: '0', width: '100%' }}>
-        <img src={image5} alt="Footer Image" style={{ width: '100%' }} />
+        <img src={image5} alt="Footer" style={{ width: '100%' }} />
       </footer>
     </div>
   );
