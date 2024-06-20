@@ -6,8 +6,11 @@ from .reservation import reservation_bp
 from .restaurant import restaurant_bp
 from .table import table_bp
 from .user import user_bp
-
+from flask_migrate import Migrate
 from flask_cors import CORS
+
+# Import all your models here
+from .models import User, Restaurant, Table, Reservation, Menu
 
 
 def create_app():
@@ -24,5 +27,8 @@ def create_app():
 
     # Create tables
     Base.metadata.create_all(engine)
+
+    # Initialize Migrate
+    migrate = Migrate(app, Base)
 
     return app

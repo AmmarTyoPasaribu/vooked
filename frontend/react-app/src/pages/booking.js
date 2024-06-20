@@ -8,9 +8,10 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { format, addDays } from 'date-fns';
 import Appnavbar from '../compunents/navbar';
+import useUserAuth from '../utils/useUserAuth';
 
 const Tab = () => {
-  useAuth();
+  useUserAuth();
   const [table, setTable] = useState({});
   const [formData, setFormData] = useState({
     jumlah_orang: '',
@@ -21,11 +22,13 @@ const Tab = () => {
   });
   const [maxPengunjung, setMaxPengunjung] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [status, setStatus] = useState('');
   const { resto_id, table_id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
+    fetchStatus(table_id);
   }, []);
 
   useEffect(() => {
@@ -35,6 +38,22 @@ const Tab = () => {
       setIsButtonDisabled(false);
     }
   }, [formData, maxPengunjung]);
+
+  const fetchStatus = async (table_id) => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:5000/api/tablestatus/${resto_id}/${table_id}`, {
+        headers: {
+          'x-access-token': localStorage.getItem('jwtToken'),
+        }
+      });
+      if (response.status === 200) {
+        setStatus(response.data);
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -59,6 +78,11 @@ const Tab = () => {
 
   const handleBook = async (e) => {
     e.preventDefault();
+    console.log("stat = " + status)
+    if (status == '1') {
+      alert('Table is unavailable.');
+      return;
+    }
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/reservation', formData, {
         headers: {
@@ -134,11 +158,6 @@ const Tab = () => {
                       name="jumlah_orang"
                       value={formData.jumlah_orang}
                       onChange={handleChange}
-                      onKeyDown={(e) => {
-                        if (!/[0-9\b]/.test(e.key)) {
-                          e.preventDefault();
-                        }
-                      }}
                       min="1"
                       max={table.kapasitas}
                     />

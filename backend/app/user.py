@@ -19,7 +19,8 @@ def get_user(current_user):
         'name': user.nama,
         'email': user.email,
         'phone': user.nomor_telepon,
-        'address': user.alamat
+        'address': user.alamat,
+        'role': user.role
     }
     print(user_data)
     return jsonify({'user': user_data})
@@ -38,6 +39,7 @@ def update_user(current_user):
     user.email = data.get('email', user.email)
     user.nomor_telepon = data.get('phone', user.nomor_telepon)
     user.alamat = data.get('address', user.alamat)
+    user.role = data.get('role', user.role)
     session.commit()
     session.close()
     return jsonify({'message': 'User updated!'})

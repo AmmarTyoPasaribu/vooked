@@ -3,14 +3,15 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import "../distcss/signup.css";
 
-const Signup = () => {
+const Admsignup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     address: '',
     password: '',
-    role: 'user'
+    role: 'admin',
+    jam_operasional: ''
   });
 
   const [message, setMessage] = useState('');
@@ -27,11 +28,12 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/register', formData);
-      if (response.status === 200) {
-        console.log(response.data);
-        setMessage('Signup successful!');
-        navigate('/signin'); 
+      const registerResponse = await axios.post('http://127.0.0.1:5000/api/register', formData);
+      console.log(registerResponse.data);
+      if (registerResponse.status === 200) {
+        console.log(registerResponse.data);
+        setMessage('Signup and restaurant creation successful!');
+        navigate('/admin/signin');
       } else {
         setMessage('Signup failed. Please try again.');
       }
@@ -43,13 +45,13 @@ const Signup = () => {
   return (
     <div className="register-container">
       <div className="register-form">
-        <h2>Create your Account</h2>
+        <h2>Register your Restaurant</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Full Name</label>
+            <label>Restaurant Name</label>
             <input 
               type="text" 
-              placeholder="Enter your Full Name here" 
+              placeholder="Enter your Restaurant Name here" 
               name="name"
               value={formData.name}
               onChange={handleChange}
@@ -100,6 +102,17 @@ const Signup = () => {
               required 
             />
           </div>
+          <div className="form-group">
+            <label>Operating Hours</label>
+            <input 
+              type="text" 
+              placeholder="Enter the Operating Hours here" 
+              name="jam_operasional"
+              value={formData.jam_operasional}
+              onChange={handleChange}
+              required 
+            />
+          </div>
           <button type="submit" className="create-account-button">Create Account</button>
           {message && <p>{message}</p>}
         </form>
@@ -112,4 +125,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Admsignup;

@@ -5,9 +5,10 @@ import Table from 'react-bootstrap/Table';
 import { useParams, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import useAuth from '../utils/useAuth';
+import useUserAuth from '../utils/useUserAuth';
 
 const Tables = () => {
-  useAuth();
+  useUserAuth();
   const [tables, setTables] = useState([]);
   const [status, setStatus] = useState({});
   const { resto_id } = useParams();
@@ -84,7 +85,7 @@ const Tables = () => {
                   <Button
                     disabled={status[table.table_id] === 1}
                     variant="primary"
-                    onClick={() => (handleBook(table.restaurant_id))}>
+                    onClick={() => (handleBook(table.table_id))}>
                     Book Now
                   </Button>
                 </td>

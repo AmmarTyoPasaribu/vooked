@@ -4,11 +4,12 @@ import jwt
 import datetime
 from functools import wraps
 from .config import Session
-from .models import User
+from .models import User, Restaurant
 
 auth_bp = Blueprint('auth', __name__)
 
 SECRET_KEY = "super_secret"
+
 
 def token_required(f):
     @wraps(f)
@@ -42,12 +43,29 @@ def register():
         email=data['email'],
         nomor_telepon=data['phone'],
         alamat=data['address'],
-        password=hashed_password
+        password=hashed_password,
+        role=data['role']
     )
-    session.add(new_user)
-    session.commit()
-    session.close()
-    return jsonify({'message': 'New user created!'})
+    try:
+        session.add(new_user)
+        session.commit()
+        # Create a restaurant for the new admin user
+        if new_user.role == 'admin':
+            new_restaurant = Restaurant(
+                user_id=new_user.user_id,
+                jam_operasional=data['jam_operasional']
+            )
+            session.add(new_restaurant)
+            session.commit()
+
+        session.close()
+        return jsonify({'message': 'New user created!'})
+    except Exception as e:
+        session.rollback()
+        return jsonify({'message': f'Error: {str(e)}'}), 500
+    finally:
+        session.close()
+
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
@@ -60,8 +78,6 @@ def login():
     token = jwt.encode({'user_id': user.user_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)},
                        SECRET_KEY, algorithm="HS256")
     session.close()
-    # return jsonify({'token': token.decode('utf-8')})  # Gunakan decode bukan encode
-    print(token)
     return jsonify({'token': token})
 
 
