@@ -91,7 +91,7 @@ const Tab = () => {
       });
       if (response.status === 200) {
         console.log(response.data);
-        navigate(`/tables/${resto_id}`);
+        navigate(`/`);
       } else {
         console.error('Failed to book table');
       }

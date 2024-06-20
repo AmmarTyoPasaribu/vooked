@@ -43,7 +43,7 @@ const Admsignup = () => {
   };
 
   return (
-    <div className="register-container">
+    <div className="register-container" style={{ marginTop: '50px' }}>
       <div className="register-form">
         <h2>Register your Restaurant</h2>
         <form onSubmit={handleSubmit}>
@@ -118,7 +118,7 @@ const Admsignup = () => {
         </form>
         <div className="login-link">
           <span>I Already Have An Account </span>
-          <Link to="/signin">Login</Link>
+          <Link to="/admin/signin">Login</Link>
         </div>
       </div>
     </div>

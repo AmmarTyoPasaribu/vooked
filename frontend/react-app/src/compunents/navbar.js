@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Logo from './logo';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "../distcss/navbar.css";
-
 const Appnavbar = () => {
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+
     fetchUserName();
-  }, []);
+  }, []); 
 
   const handleLogin = async () => {
     try {
@@ -24,17 +23,13 @@ const Appnavbar = () => {
   };
 
   const handleLogout = async () => {
+
     localStorage.removeItem('jwtToken');
     setUser(null);
-    if (role === 'admin') {
-      navigate('/admin/signin');
-    } else {
-      navigate('/');
-    }
-    setRole(null);
+    navigate('/');
   };
 
-  const fetchUserName = async () => {
+  const fetchUserName = async (e) => {
     try {
       const response = await axios.get('http://127.0.0.1:5000/api/user', {
         headers: {
@@ -44,12 +39,10 @@ const Appnavbar = () => {
 
       if (response.status === 200) {
         setUser(response.data.user.name);
-        setRole(response.data.user.role);
       } else {
-        // Handle other status codes
+        
       }
     } catch (error) {
-      // Handle error
     }
   };
 
@@ -57,21 +50,24 @@ const Appnavbar = () => {
     <div>
       <Navbar style={{ backgroundColor: 'orange', marginBottom: '15px' }}>
         <Container>
-          <Link to="/" className="navbar-brand">
+          <Navbar.Brand href="/">
             <Logo />
-          </Link>
+          </Navbar.Brand>
           <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
+          <Navbar.Collapse className="justify-content-between">
             <Navbar.Text>
+              <a href="/" style={{ textDecoration: 'none', color: 'white', fontWeight: 'bold', fontSize: '18px', padding: '10px', borderRadius: '5px' }}>Home</a>
+            </Navbar.Text>
+            <Navbar.Text style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold', fontSize: '18px', padding: '10px', borderRadius: '5px' }}>
               {user ? (
                 <>
-                  Signed in as: <a href="#login">{user}</a>
-                  <button onClick={handleLogout} className="btn btn-link">
+                  Signed in as : <a>{user}</a>
+                  <button style={{ textDecoration: 'none', color: 'red', fontWeight: 'bold', fontSize: '18px', padding: '10px', borderRadius: '5px' }} onClick={handleLogout} className="btn btn-link">
                     Logout
                   </button>
                 </>
               ) : (
-                <a href="#login" onClick={handleLogin}>
+                <a style={{ textDecoration: 'none', color: 'purple', fontWeight: 'bold', fontSize: '18px', padding: '10px', borderRadius: '5px' }} href="" onClick={handleLogin}>
                   Login
                 </a>
               )}

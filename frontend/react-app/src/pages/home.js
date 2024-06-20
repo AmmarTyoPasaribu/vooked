@@ -6,11 +6,14 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import image1 from './1.jpeg';
-import image2 from './2.jpeg';
-import image3 from './3.jpeg';
-import image4 from './4.jpeg';
-import image5 from './11.png';
+import image1 from '../img/1.jpeg';
+import image2 from '../img/2.jpeg';
+import image3 from '../img/3.jpeg';
+import image4 from '../img/4.jpeg';
+import image5 from '../img/5.jpeg';
+import image6 from '../img/6.jpeg';
+import imagee from '../img/11.png';
+
 import '../distcss/home.css';
 
 const Home = () => {
@@ -26,7 +29,7 @@ const Home = () => {
     fetchUserReservations();
   }, []);
 
-  const images = [image1, image2, image3, image4];
+  const images = [image1, image2, image3, image4, image5, image6];
 
   const checkLoginStatus = async () => {
     try {
@@ -75,9 +78,9 @@ const Home = () => {
     }
   };
 
-  const handleTable = (restaurant_id) => {
+  const handleTable = (restaurant) => {
     try {
-      navigate(`/tables/${restaurant_id}`);
+      navigate(`/tables/${restaurant.restaurant_id}`, { state: { restaurant } });
     } catch (error) {
       console.error('Table navigation failed!', error);
     }
@@ -94,14 +97,15 @@ const Home = () => {
     } catch (error) {
       console.error('Delete reservation failed!', error);
     }
-  };
+  }; 
 
   return (
     <div>
       <Appnavbar />
       {isLoggedIn ? (
-        <Tabs defaultActiveKey="restaurants" id="home-tabs">
+        <Tabs defaultActiveKey="restaurants" id="home-tabs" style={{ marginBottom: '30px' }}>
           <Tab eventKey="restaurants" title="Restaurants">
+          <div>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
               {restaurants.map((restaurant, index) => (
                 <Card key={restaurant.restaurant_id} style={{ width: '18rem' }}>
@@ -114,19 +118,34 @@ const Home = () => {
                       {restaurant.jam_operasional}
                     </Card.Text>
                     {isLoggedIn && (
-                      <Button variant="primary" onClick={() => handleTable(restaurant.restaurant_id)}>
-                        See Tables
-                      </Button>
+                    <Button variant="primary" onClick={() => handleTable(restaurant)}>
+                    See Tables
+                  </Button>
                     )}
                   </Card.Body>
                 </Card>
               ))}
             </div>
+            {restaurants.length > 0 ? (
+              <div style={{ marginTop: '20px' }}>
+                <footer style={{ bottom: '0', width: '100%' }}>
+                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+                </footer>
+              </div>
+            ) : (
+              <div style={{ marginTop: '20px' }}>
+                <footer style={{position:'fixed', bottom: '0', width: '100%' }}>
+                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+                </footer>
+              </div>
+            )}
+            </div>
           </Tab>
           <Tab eventKey="reservations" title="Reservations">
-            <div style={{ marginTop: '1rem' }}>
+            <div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
               {userReservations.map((reservation) => (
-                <Card key={reservation.reservation_id} style={{ width: '18rem', marginBottom: '1rem' }}>
+                <Card key={reservation.reservation_id} style={{ width: '18rem' }}>
                   <Card.Body>
                     <Card.Title>Reservation ID: {reservation.reservation_id}</Card.Title>
                     <Card.Text>
@@ -142,6 +161,20 @@ const Home = () => {
                   </Card.Body>
                 </Card>
               ))}
+            </div>
+            {userReservations.length > 0 ? (
+              <div style={{ marginTop: '20px' }}>
+                <footer style={{ bottom: '0', width: '100%' }}>
+                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+                </footer>
+              </div>
+            ) : (
+              <div style={{ marginTop: '20px' }}>
+                <footer style={{position:'fixed', bottom: '0', width: '100%' }}>
+                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+                </footer>
+              </div>
+            )}
             </div>
           </Tab>
         </Tabs>
@@ -162,9 +195,7 @@ const Home = () => {
           ))}
         </div>
       )}
-      <footer style={{ position: 'fixed', bottom: '0', width: '100%' }}>
-        <img src={image5} alt="Footer" style={{ width: '100%' }} />
-      </footer>
+   
     </div>
   );
 };
