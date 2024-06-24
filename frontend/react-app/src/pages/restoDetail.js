@@ -1,22 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Appnavbar from '../compunents/navbar';
-import Table from 'react-bootstrap/Table';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import useAuth from '../utils/useAuth';
-import useUserAuth from '../utils/useUserAuth';
+import '../distcss/restoDetail.css';
+import image1 from '../img/1.jpeg';
+import image2 from '../img/2.jpeg';
+import image3 from '../img/3.jpeg';
+import image4 from '../img/4.jpeg';
+import image5 from '../img/5.jpeg';
+import image6 from '../img/6.jpeg';
+import imagee from '../img/11.png';
+import kursina1 from '../img/kursi1.jpeg';
+import kursina2 from '../img/kursi2.jpeg';
+import kursina3 from '../img/kursi3.jpeg';
+import kursina4 from '../img/kursi4.jpeg';
+import kursina5 from '../img/kursi5.jpeg';
 
 const Tables = () => {
-  useUserAuth();
+  useAuth();
   const [tables, setTables] = useState([]);
   const [status, setStatus] = useState({});
   const { resto_id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const restaurant = location.state.restaurant;
 
   useEffect(() => {
     fetchTable();
   }, []); 
+  const images = [image1, image2, image3, image4, image5, image6];
+  const kursi1 = kursina1;
+  const kursi2 = kursina2;
+  const kursi3 = kursina3;
+  const kursi4 = kursina4;
+  const kursi5 = kursina5;
 
   const fetchTable = async () => {
     try {
@@ -63,37 +83,42 @@ const Tables = () => {
   return (
     <div>
       <Appnavbar />
-      <div style={{ padding: '2rem' }}>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>No.</th>
-              <th>Nomor Meja</th>
-              <th>Kapasitas</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tables.map((table, index) => (
-              <tr key={table.table_id}>
-                <td>{index + 1}</td>
-                <td>{table.nomor_meja}</td>
-                <td>{table.kapasitas}</td>
-                <td>{status[table.table_id] === 0 ? 'Available' : 'Unavailable'}</td>
-                <td>
-                  <Button
-                    disabled={status[table.table_id] === 1}
-                    variant="primary"
-                    onClick={() => (handleBook(table.table_id))}>
-                    Book Now
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+      
+      <div style={{ backgroundColor: '#f0f0f0', padding: '20px',margin:'20px' }}>
+      <h1 style={{ fontFamily: 'Cursive', fontSize: '30px', fontWeight: 'bold' }}>Our Restaurant</h1>
+      <hr style={{ backgroundColor: 'orange', height: '3px', border: 'none' }}></hr>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <div style={{ marginRight: '20px' }}>
+            <img src={images[(resto_id - 1) % images.length]} alt="Restaurant Image" width="480" height="270" />
+          </div>
+          <div>
+            <h2>{restaurant.nama_restoran}</h2>
+            <p>{restaurant.alamat}</p>
+          </div>
+        </div>
+        <h2 style={{ fontFamily: 'Cursive', fontSize: '30px', fontWeight: 'bold', marginTop: '15px' }}>Table List</h2>
+      <hr style={{ backgroundColor: 'orange', height: '3px', border: 'none' }}></hr>
+        <div className="card-container">
+          {tables.map((table, index) => (
+            <Card key={table.table_id} style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={table.kapasitas === 1 ? kursi1 : table.kapasitas === 2 ? kursi2 : table.kapasitas === 3 ? kursi3 : table.kapasitas === 4 ? kursi4 : kursi5} style={{ width: '285px', height: '285px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }} />
+              <Card.Body>
+                <Card.Title>Nomor Meja: {table.nomor_meja}</Card.Title>
+                <Card.Text>
+                  Kapasitas: {table.kapasitas}<br />
+                  Status: {status[table.table_id] === 0 ? 'Available' : 'Unavailable'}
+                </Card.Text>
+                <Button variant={status[table.table_id] === 0 ? "primary" : "danger"} disabled={status[table.table_id] !== 0} onClick={() => handleBook(table.table_id)}>
+                  {status[table.table_id] === 0 ? "Book Now" : "ALREADY BOOKED"}
+                </Button>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       </div>
+      <footer style={{  bottom: '0', width: '100%' }}>
+        <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+      </footer>
     </div>
   );
 };

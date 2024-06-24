@@ -41,7 +41,7 @@ const AdmsignIn = () => {
   return (
     <div className="sign-in">
       <div className="content">
-        <div className="title">Login</div>
+        <div className="title">Login As Admin</div>
         <form onSubmit={handleSubmit}>
           <div className="email-input">
             <label className="label">Email</label>
@@ -72,7 +72,7 @@ const AdmsignIn = () => {
         </form>
         <div className="create-account">
           <span>Create An Account </span>
-          <Link to="/signup" className="sign-up-link">Sign Up</Link>
+          <Link to="/admin/register" className="sign-up-link">Sign Up</Link>
         </div>
       </div>
     </div>
