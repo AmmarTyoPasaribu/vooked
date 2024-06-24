@@ -78,7 +78,7 @@ def login():
     token = jwt.encode({'user_id': user.user_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)},
                        SECRET_KEY, algorithm="HS256")
     session.close()
-    return jsonify({'token': token.decode('utf-8')})
+    return jsonify({'token': token})
 
 
 @auth_bp.route('/logout', methods=['POST'])
