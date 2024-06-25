@@ -287,6 +287,8 @@ const Admhome = () => {
   return (
     <div>
       <Appnavbar />
+      <div style={{ padding: '2rem' }}>
+        <Tabs defaultActiveKey="tables" id="admin-tabs">
       <div className="container mt-3">
         <h3>Admin Dashboard</h3>
         <Tabs defaultActiveKey="tables" id="uncontrolled-tab-example" className="mb-3">

@@ -15,6 +15,8 @@ import image4 from '../img/4.jpeg';
 import image5 from '../img/5.jpeg';
 import image6 from '../img/6.jpeg';
 import imagee from '../img/11.png';
+import makan from '../img/makanan.jpeg';
+import makanbg from '../img/bgmakan.jpeg';
 import kursina1 from '../img/kursi1.jpeg';
 import kursina2 from '../img/kursi2.jpeg';
 import kursina3 from '../img/kursi3.jpeg';
@@ -41,6 +43,8 @@ const Tables = () => {
   const kursi2 = kursina2;
   const kursi3 = kursina3;
   const kursi4 = kursina4;
+  const fotomakan = makan;
+  const fotomakanbg = makanbg;
   const kursi5 = kursina5;
 
   const fetchTable = async () => {
@@ -139,18 +143,22 @@ const Tables = () => {
               ))}
             </div>
           </Tab>
+
           <Tab eventKey="menu" title="Menu">
             <h2 style={{ fontFamily: 'Cursive', fontSize: '30px', fontWeight: 'bold', marginTop: '15px' }}>Menu</h2>
             <hr style={{ backgroundColor: 'orange', height: '3px', border: 'none' }}></hr>
             <div className="card-container">
               {menuItems.map((menuItem, index) => (
-                <Card key={menuItem.menu_id} style={{ width: '18rem' }}>
-                  <Card.Body>
-                    <Card.Title>{menuItem.nama_menu}</Card.Title>
-                    <Card.Text>
-                      {menuItem.deskripsi}<br />
-                      Harga: Rp {menuItem.harga}
+                <Card key={menuItem.menu_id} style={{ width: '18rem', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px', background: 'white' }}>
+                  <Card.Img variant="top" src={fotomakan} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+                  <Card.Body style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Card.Title style={{ margin: '10px 0' }}>{menuItem.nama_menu}</Card.Title>
+                    <Card.Text style={{ textAlign: 'center' }}>
+                      {menuItem.deskripsi}
                     </Card.Text>
+                    <div style={{ backgroundColor: '#E0E0E0', borderRadius: '20px', padding: '5px 20px', color: '#6200EA', fontWeight: 'bold', marginTop: '10px' }}>
+                      Rp {menuItem.harga}
+                    </div>
                   </Card.Body>
                 </Card>
               ))}

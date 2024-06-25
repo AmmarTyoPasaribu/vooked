@@ -66,7 +66,6 @@ def register():
     finally:
         session.close()
 
-
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -78,8 +77,10 @@ def login():
     token = jwt.encode({'user_id': user.user_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)},
                        SECRET_KEY, algorithm="HS256")
     session.close()
-    return jsonify({'token': token})
-
+    try:
+        return jsonify({'token': token}) 
+    except:
+        return jsonify({'token': token.decode('utf-8')})
 
 @auth_bp.route('/logout', methods=['POST'])
 @token_required
