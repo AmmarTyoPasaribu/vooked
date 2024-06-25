@@ -143,7 +143,8 @@ const Tables = () => {
               ))}
             </div>
           </Tab>
-            <Tab eventKey="menu" title="Menu">
+
+          <Tab eventKey="menu" title="Menu">
             <h2 style={{ fontFamily: 'Cursive', fontSize: '30px', fontWeight: 'bold', marginTop: '15px' }}>Menu</h2>
             <hr style={{ backgroundColor: 'orange', height: '3px', border: 'none' }}></hr>
             <div className="card-container">

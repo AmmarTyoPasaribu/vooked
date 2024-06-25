@@ -7,6 +7,7 @@ DATABASE_USER = os.getenv('DATABASE_USER', 'root')
 DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD', '')
 DATABASE_HOST = os.getenv('DATABASE_HOST', 'localhost')
 DATABASE_PORTS = [os.getenv('DATABASE_PORT', '3307'), '3306']
+DATABASE_PORT = os.getenv('DATABASE_PORT', '3307')
 DATABASE_NAME = os.getenv('DATABASE_NAME', 'db_vooked')
 
 def create_engine_with_fallback():
