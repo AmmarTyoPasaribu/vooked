@@ -287,8 +287,6 @@ const Admhome = () => {
   return (
     <div>
       <Appnavbar />
-      <div style={{ padding: '2rem' }}>
-        <Tabs defaultActiveKey="tables" id="admin-tabs">
       <div className="container mt-3">
         <h3>Admin Dashboard</h3>
         <Tabs defaultActiveKey="tables" id="uncontrolled-tab-example" className="mb-3">
@@ -431,7 +429,7 @@ const Admhome = () => {
               <Form.Group controlId="formNamaMenu">
                 <Form.Label>Nama Menu</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="text"inMinutes
                   placeholder="Enter menu name"
                   name="nama_menu"
                   value={newMenuData.nama_menu}

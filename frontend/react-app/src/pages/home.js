@@ -126,19 +126,6 @@ const Home = () => {
                 </Card>
               ))}
             </div>
-            {restaurants.length > 0 ? (
-              <div style={{ marginTop: '20px' }}>
-                <footer style={{ bottom: '0', width: '100%' }}>
-                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
-                </footer>
-              </div>
-            ) : (
-              <div style={{ marginTop: '20px' }}>
-                <footer style={{position:'fixed', bottom: '0', width: '100%' }}>
-                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
-                </footer>
-              </div>
-            )}
             </div>
           </Tab>
           <Tab eventKey="reservations" title="Reservations">
@@ -147,7 +134,7 @@ const Home = () => {
               {userReservations.map((reservation) => (
                 <Card key={reservation.reservation_id} style={{ width: '18rem' }}>
                   <Card.Body>
-                    <Card.Title>Reservation ID: {reservation.reservation_id}</Card.Title>
+                    <Card.Title>Reservation ID: {reservation.restaurant_name}</Card.Title>
                     <Card.Text>
                       Restaurant ID: {reservation.restaurant_id}<br />
                       Table ID: {reservation.table_id}<br />
@@ -162,19 +149,6 @@ const Home = () => {
                 </Card>
               ))}
             </div>
-            {userReservations.length > 0 ? (
-              <div style={{ marginTop: '20px' }}>
-                <footer style={{ bottom: '0', width: '100%' }}>
-                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
-                </footer>
-              </div>
-            ) : (
-              <div style={{ marginTop: '20px' }}>
-                <footer style={{position:'fixed', bottom: '0', width: '100%' }}>
-                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
-                </footer>
-              </div>
-            )}
             </div>
           </Tab>
         </Tabs>
@@ -195,6 +169,11 @@ const Home = () => {
           ))}
         </div>
       )}
+              <div style={{ marginTop: '20px' }}>
+                <footer style={{ bottom: '0', width: '100%' }}>
+                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+                </footer>
+              </div>
    
     </div>
   );

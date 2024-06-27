@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import useAuth from '../utils/useAuth';
+import useUserAuth from '../utils/useAuth';
 import '../distcss/restoDetail.css';
 import image1 from '../img/1.jpeg';
 import image2 from '../img/2.jpeg';
@@ -24,7 +24,7 @@ import kursina4 from '../img/kursi4.jpeg';
 import kursina5 from '../img/kursi5.jpeg';
 
 const Tables = () => {
-  useAuth();
+  useUserAuth();
   const [tables, setTables] = useState([]);
   const [status, setStatus] = useState({});
   const [menuItems, setMenuItems] = useState([]);

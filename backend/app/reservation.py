@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from .config import Session
-from .models import Reservation, User
+from .models import Reservation, User, Restaurant
 from .auth import token_required
 from datetime import datetime
 
@@ -81,13 +81,25 @@ def delete_reservation(current_user, reservation_id):
 @token_required
 def get_reservations_user(current_user):
     session = Session()
-    reservations = session.query(Reservation).filter_by(user_id=current_user.user_id).all()
+    reservations = (
+        session.query(Reservation, Restaurant, User)
+        .join(Restaurant, Reservation.restaurant_id == Restaurant.restaurant_id)
+        .join(User, Restaurant.user_id == User.user_id)
+        .filter(Reservation.user_id == current_user.user_id)
+        .all()
+    )
+
+    result = []
+    for res, restaurant, user in reservations:
+        result.append({
+            'reservation_id': res.reservation_id,
+            'restaurant_id': res.restaurant_id,
+            'table_id': res.table_id,
+            'tanggal_reservasi': res.tanggal_reservasi.strftime('%Y-%m-%d'),
+            'waktu_reservasi': res.waktu_reservasi.strftime('%H:%M:%S'),
+            'jumlah_orang': res.jumlah_orang,
+            'restaurant_name': user.nama  # Mengambil nama dari tabel User
+        })
+
     session.close()
-    return jsonify([{
-        'reservation_id': res.reservation_id,
-        'restaurant_id': res.restaurant_id,
-        'table_id': res.table_id,
-        'tanggal_reservasi': res.tanggal_reservasi.strftime('%Y-%m-%d'),
-        'waktu_reservasi': res.waktu_reservasi.strftime('%H:%M:%S'),
-        'jumlah_orang': res.jumlah_orang
-    } for res in reservations])
+    return jsonify(result)
