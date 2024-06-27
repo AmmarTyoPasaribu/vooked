@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.cormorant-font {
+  font-family: 'Cormorant Infant', serif;
+}
+.josefin-font {
+  font-family: 'Josefin Sans', sans-serif;
+}

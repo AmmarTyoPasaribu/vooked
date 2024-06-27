@@ -7,12 +7,13 @@ import Button from 'react-bootstrap/Button';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import image1 from '../img/1.jpeg';
+import hero from '../img/hero.png';
 import image2 from '../img/2.jpeg';
 import image3 from '../img/3.jpeg';
 import image4 from '../img/4.jpeg';
 import image5 from '../img/5.jpeg';
 import image6 from '../img/6.jpeg';
-import imagee from '../img/11.png';
+import imagee from '../img/services.png';
 
 import '../distcss/home.css';
 
@@ -30,6 +31,7 @@ const Home = () => {
   }, []);
 
   const images = [image1, image2, image3, image4, image5, image6];
+  const heroatas = hero;
 
   const checkLoginStatus = async () => {
     try {
@@ -102,6 +104,9 @@ const Home = () => {
   return (
     <div>
       <Appnavbar />
+      
+        <img src={heroatas} alt="hero" style={{ maxWidth: '100%', height: 'auto', margin: '0' }} />
+      
       {isLoggedIn ? (
         <Tabs defaultActiveKey="restaurants" id="home-tabs" style={{ marginBottom: '30px' }}>
           <Tab eventKey="restaurants" title="Restaurants">
@@ -110,22 +115,36 @@ const Home = () => {
               {restaurants.map((restaurant, index) => (
                 <Card key={restaurant.restaurant_id} style={{ width: '18rem' }}>
                   <Card.Img variant="top" src={images[index % images.length]} />
+                  <img src={require('../img/subtitle.png')} alt="background" style={{ width: '50%', height: 'auto', display: 'block', margin: '10px 0 0 15px' }} />
                   <Card.Body>
-                    <Card.Title>{restaurant.nama_restoran}</Card.Title>
-                    <Card.Text>
-                      {restaurant.alamat}<br />
-                      {restaurant.nomor_telepon}<br />
-                      {restaurant.jam_operasional}
-                    </Card.Text>
+                  <Card.Title className="cormorant-font"><b>{restaurant.nama_restoran}</b></Card.Title>
+                  <Card.Text className="josefin-font">
+                  {restaurant.alamat}<br />
+                  {restaurant.nomor_telepon}<br />
+                  {restaurant.jam_operasional}
+                </Card.Text>
                     {isLoggedIn && (
-                    <Button variant="primary" onClick={() => handleTable(restaurant)}>
-                    See Tables
-                  </Button>
+              <Button variant="primary" className="view-menu-button" onClick={() => handleTable(restaurant)}>
+              View Menu
+            </Button>
                     )}
                   </Card.Body>
                 </Card>
               ))}
             </div>
+            {restaurants.length > 0 ? (
+              <div style={{ marginTop: '20px' }}>
+                <footer style={{ bottom: '0', width: '100%' }}>
+                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+                </footer>
+              </div>
+            ) : (
+              <div style={{ marginTop: '20px' }}>
+                <footer style={{ bottom: '0', width: '100%' }}>
+                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+                </footer>
+              </div>
+            )}
             </div>
           </Tab>
           <Tab eventKey="reservations" title="Reservations">
@@ -149,17 +168,31 @@ const Home = () => {
                 </Card>
               ))}
             </div>
+            {userReservations.length > 0 ? (
+              <div style={{ marginTop: '20px' }}>
+                <footer style={{ bottom: '0', width: '100%' }}>
+                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+                </footer>
+              </div>
+            ) : (
+              <div style={{ marginTop: '20px' }}>
+                <footer style={{ bottom: '0', width: '100%' }}>
+                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
+                </footer>
+              </div>
+            )}
             </div>
           </Tab>
         </Tabs>
       ) : (
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
           {restaurants.map((restaurant, index) => (
-            <Card key={restaurant.restaurant_id} style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={images[index % images.length]} />
-              <Card.Body>
-                <Card.Title>{restaurant.nama_restoran}</Card.Title>
-                <Card.Text>
+              <Card key={restaurant.restaurant_id} style={{ width: '18rem' }}>
+                  <Card.Img variant="top" src={images[index % images.length]} />
+                  <img src={require('../img/subtitle.png')} alt="background" style={{ width: '50%', height: 'auto', display: 'block', margin: '10px 0 0 15px' }} />
+                  <Card.Body>
+                  <Card.Title className="cormorant-font"><b>{restaurant.nama_restoran}</b></Card.Title>
+                  <Card.Text className="josefin-font">
                   {restaurant.alamat}<br />
                   {restaurant.nomor_telepon}<br />
                   {restaurant.jam_operasional}

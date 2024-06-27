@@ -41,8 +41,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-form">
+    <div>
+    <div className="register-container" style={{ backgroundImage: `url(${require('../img/backgroundbook.png')})`, backgroundAttachment: 'fixed' }}>
+      <div className="register-form cormorant-font">
         <h2>Create your Account</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -109,7 +110,8 @@ const Signup = () => {
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Signup;

@@ -1,17 +1,21 @@
-.navbar {
-    background-color: #ffffff; /* Warna latar belakang putih */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Bayangan ringan untuk navbar */
-  }
-  
-  .navbar-brand {
-    font-weight: bold; /* Membuat teks logo lebih tebal */
-  }
-  
-  .nav-link {
-    color: #333; /* Warna teks untuk link */
-  }
-  
-  .btn-link {
-    color: #007bff; /* Warna untuk tombol logout */
-    text-decoration: none; /* Menghilangkan garis bawah */
-  }
+.custom-dropdown-menu {
+  background-color: grey !important;
+}
+
+.custom-dropdown-item {
+  background-color: grey !important;
+  color: white !important;
+}
+
+.custom-dropdown-item:hover {
+  background-color: darkgrey !important;
+  color: white !important;
+}
+
+.logout-item {
+  color: red !important;
+}
+
+.logout-item:hover {
+  color: darkred !important;
+}

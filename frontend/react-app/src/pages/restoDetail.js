@@ -14,7 +14,7 @@ import image3 from '../img/3.jpeg';
 import image4 from '../img/4.jpeg';
 import image5 from '../img/5.jpeg';
 import image6 from '../img/6.jpeg';
-import imagee from '../img/11.png';
+import imagee from '../img/services.png';
 import makan from '../img/makanan.jpeg';
 import makanbg from '../img/bgmakan.jpeg';
 import kursina1 from '../img/kursi1.jpeg';
@@ -116,8 +116,8 @@ const Tables = () => {
             <img src={images[(resto_id - 1) % images.length]} alt="Restaurant Image" width="480" height="270" />
           </div>
           <div>
-            <h2>{restaurant.nama_restoran}</h2>
-            <p>{restaurant.alamat}</p>
+            <h2 style={{ fontFamily: 'Josefin Sans' }}>{restaurant.nama_restoran}</h2>
+            <p style={{ fontFamily: 'Josefin Sans' }}>{restaurant.alamat}</p>
           </div>
         </div>
         
@@ -126,44 +126,48 @@ const Tables = () => {
             <h2 style={{ fontFamily: 'Cursive', fontSize: '30px', fontWeight: 'bold', marginTop: '15px' }}>Table List</h2>
             <hr style={{ backgroundColor: 'orange', height: '3px', border: 'none' }}></hr>
             <div className="card-container">
-              {tables.map((table, index) => (
-                <Card key={table.table_id} style={{ width: '18rem' }}>
-                  <Card.Img variant="top" src={table.kapasitas === 1 ? kursi1 : table.kapasitas === 2 ? kursi2 : table.kapasitas === 3 ? kursi3 : table.kapasitas === 4 ? kursi4 : kursi5} style={{ width: '285px', height: '285px', display: 'block', marginLeft: 'auto', marginRight: 'auto' }} />
-                  <Card.Body>
-                    <Card.Title>Nomor Meja: {table.nomor_meja}</Card.Title>
-                    <Card.Text>
-                      Kapasitas: {table.kapasitas}<br />
-                      Status: {status[table.table_id] === 0 ? 'Available' : 'Unavailable'}
-                    </Card.Text>
-                    <Button variant={status[table.table_id] === 0 ? "primary" : "danger"} disabled={status[table.table_id] !== 0} onClick={() => handleBook(table.table_id)}>
-                      {status[table.table_id] === 0 ? "Book Now" : "ALREADY BOOKED"}
-                    </Button>
-                  </Card.Body>
-                </Card>
-              ))}
-            </div>
+  {tables.map((table, index) => (
+    <Card key={table.table_id} className="card">
+      <Card.Img variant="top" src={table.kapasitas === 1 ? kursi1 : table.kapasitas === 2 ? kursi2 : table.kapasitas === 3 ? kursi3 : table.kapasitas === 4 ? kursi4 : kursi5} className="card-img-top" />
+      <Card.Body className="card-body">
+        <Card.Title className="card-title">Nomor Meja: {table.nomor_meja}</Card.Title>
+        <Card.Text className="card-text">
+          Kapasitas: {table.kapasitas}<br />
+          Status: {status[table.table_id] === 0 ? 'Available' : 'Unavailable'}
+        </Card.Text>
+        <Button
+          variant={status[table.table_id] === 0 ? "primary" : "danger"}
+          disabled={status[table.table_id] !== 0}
+          onClick={() => handleBook(table.table_id)}
+          className={status[table.table_id] === 0 ? "view-menu-button" : "btn-disabled"}
+        >
+          {status[table.table_id] === 0 ? "Book Now" : "ALREADY BOOKED"}
+        </Button>
+      </Card.Body>
+    </Card>
+  ))}
+</div>
           </Tab>
-
           <Tab eventKey="menu" title="Menu">
-            <h2 style={{ fontFamily: 'Cursive', fontSize: '30px', fontWeight: 'bold', marginTop: '15px' }}>Menu</h2>
-            <hr style={{ backgroundColor: 'orange', height: '3px', border: 'none' }}></hr>
-            <div className="card-container">
-              {menuItems.map((menuItem, index) => (
-                <Card key={menuItem.menu_id} style={{ width: '18rem', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px', background: 'white' }}>
-                  <Card.Img variant="top" src={fotomakan} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
-                  <Card.Body style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <Card.Title style={{ margin: '10px 0' }}>{menuItem.nama_menu}</Card.Title>
-                    <Card.Text style={{ textAlign: 'center' }}>
-                      {menuItem.deskripsi}
-                    </Card.Text>
-                    <div style={{ backgroundColor: '#E0E0E0', borderRadius: '20px', padding: '5px 20px', color: '#6200EA', fontWeight: 'bold', marginTop: '10px' }}>
-                      Rp {menuItem.harga}
-                    </div>
-                  </Card.Body>
-                </Card>
-              ))}
-            </div>
-          </Tab>
+  <h2 style={{ fontFamily: 'Cursive', fontSize: '30px', fontWeight: 'bold', marginTop: '15px' }}>Menu</h2>
+  <hr style={{ backgroundColor: 'orange', height: '3px', border: 'none' }}></hr>
+  <div className="card-container">
+    {menuItems.map((menuItem, index) => (
+      <Card key={menuItem.menu_id} className="card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '10px', background: 'white' }}>
+        <Card.Img variant="top" src={fotomakan} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />
+        <Card.Body className="card-body" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Card.Title className="card-title" style={{ margin: '10px 0' }}>{menuItem.nama_menu}</Card.Title>
+          <Card.Text className="card-text" style={{ textAlign: 'center' }}>
+            {menuItem.deskripsi}
+          </Card.Text>
+          <div style={{ backgroundColor: '#E0E0E0', borderRadius: '20px', padding: '5px 20px', color: '#6200EA', fontWeight: 'bold', marginTop: '10px' }}>
+            Rp {menuItem.harga}
+          </div>
+        </Card.Body>
+      </Card>
+    ))}
+  </div>
+</Tab>
         </Tabs>
       </div>
 
