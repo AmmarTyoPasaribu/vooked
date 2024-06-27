@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    font-family: 'Cormorant Infant', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .cormorant-font {
+    font-family: 'Cormorant Infant', serif;
+  }
+  
+  .booking-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .booking-form {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 2rem;
+    border-radius: 10px;
+    color: white;
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .booking-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .booking-form .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .booking-form .form-control {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: white;
+  }
+  
+  .booking-form .form-label {
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .booking-form .btn-primary {
+    width: 100%;
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .booking-form .btn-primary:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }

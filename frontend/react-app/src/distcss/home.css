@@ -10,16 +10,31 @@
     width: 18rem; /* Lebar kartu */
     box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Bayangan untuk kartu */
   }
-  
-  .card-img-top {
-    height: 180px; /* Tinggi gambar pada kartu */
-    object-fit: cover; /* Pastikan gambar menutupi area dengan baik */
+  .view-menu-button {
+    background-color: transparent !important;
+    border: 2px solid #D4A373 !important;
+    color: #D4A373 !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 1.25rem !important;
+    font-family: 'Josefin Sans', sans-serif !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s, color 0.3s !important;
   }
+  
+  .view-menu-button:hover {
+    background-color: #D4A373 !important;
+    color: white !important;
+  }
+  .card-img-top {
+    width: 100%; /* Lebar gambar 100% dari kartu */
+    height: auto; /* Tinggi otomatis untuk menjaga rasio */
+    object-fit: contain; /* Pastikan gambar ditampilkan sepenuhnya */
+}
   
   .card-body {
     padding: 15px; /* Padding untuk isi kartu */
   }
-  
+    
   .card-title {
     font-size: 1.25rem; /* Ukuran font untuk judul */
     margin-bottom: 0.5rem; /* Jarak antara judul dan teks */

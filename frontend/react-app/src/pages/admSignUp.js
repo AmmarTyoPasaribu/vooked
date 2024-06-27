@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import "../distcss/signup.css";
+import "../distcss/admsignup.css";
 
 const Admsignup = () => {
   const [formData, setFormData] = useState({
@@ -43,14 +43,15 @@ const Admsignup = () => {
   };
 
   return (
-    <div className="register-container" style={{ marginTop: '50px' }}>
-      <div className="register-form">
-        <h2>Register your Restaurant</h2>
+    <div className="sign-in" style={{ backgroundImage: `url(${require('../img/backgroundbook.png')})`}}>
+      <div className="content cormorant-font" style={{ marginTop: '300px' }}>
+        <div className="title">Register your Restaurant</div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Restaurant Name</label>
+            <label className="label">Restaurant Name</label>
             <input 
               type="text" 
+              className="input" 
               placeholder="Enter your Restaurant Name here" 
               name="name"
               value={formData.name}
@@ -59,9 +60,10 @@ const Admsignup = () => {
             />
           </div>
           <div className="form-group">
-            <label>Email</label>
+            <label className="label">Email</label>
             <input 
               type="email" 
+              className="input" 
               placeholder="Enter your Email here" 
               name="email"
               value={formData.email}
@@ -70,9 +72,10 @@ const Admsignup = () => {
             />
           </div>
           <div className="form-group">
-            <label>Password</label>
+            <label className="label">Password</label>
             <input 
               type="password" 
+              className="input" 
               placeholder="Enter your Password here" 
               name="password"
               value={formData.password}
@@ -81,9 +84,10 @@ const Admsignup = () => {
             />
           </div>
           <div className="form-group">
-            <label>Phone Number</label>
+            <label className="label">Phone Number</label>
             <input 
               type="text" 
+              className="input" 
               placeholder="Enter your Phone Number here" 
               name="phone"
               value={formData.phone}
@@ -92,9 +96,10 @@ const Admsignup = () => {
             />
           </div>
           <div className="form-group">
-            <label>Address</label>
+            <label className="label">Address</label>
             <input 
               type="text" 
+              className="input" 
               placeholder="Enter your Address here" 
               name="address"
               value={formData.address}
@@ -103,9 +108,10 @@ const Admsignup = () => {
             />
           </div>
           <div className="form-group">
-            <label>Operating Hours</label>
+            <label className="label">Operating Hours</label>
             <input 
               type="text" 
+              className="input" 
               placeholder="Enter the Operating Hours here" 
               name="jam_operasional"
               value={formData.jam_operasional}
@@ -113,12 +119,12 @@ const Admsignup = () => {
               required 
             />
           </div>
-          <button type="submit" className="create-account-button">Create Account</button>
+          <button type="submit" className="login-button">Create Account</button>
           {message && <p>{message}</p>}
         </form>
-        <div className="login-link">
+        <div className="create-account">
           <span>I Already Have An Account </span>
-          <Link to="/admin/signin">Login</Link>
+          <Link to="/admin/signin" className="sign-up-link">Login</Link>
         </div>
       </div>
     </div>

@@ -4,7 +4,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import Logo from './logo';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Dropdown } from 'react-bootstrap';
+import { PersonCircle } from 'react-bootstrap-icons';
 import "../distcss/navbar.css";
+
 const Appnavbar = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -48,30 +51,28 @@ const Appnavbar = () => {
 
   return (
     <div>
-      <Navbar style={{ backgroundColor: 'orange', marginBottom: '15px' }}>
+      <Navbar style={{ backgroundColor: "#292E36"}}>
         <Container>
-          <Navbar.Brand href="/">
-            <Logo />
-          </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-between">
-            <Navbar.Text>
-              <a href="/" style={{ textDecoration: 'none', color: 'white', fontWeight: 'bold', fontSize: '18px', padding: '10px', borderRadius: '5px' }}>Home</a>
-            </Navbar.Text>
-            <Navbar.Text style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold', fontSize: '18px', padding: '10px', borderRadius: '5px' }}>
-              {user ? (
-                <>
-                  Signed in as : <a>{user}</a>
-                  <button style={{ textDecoration: 'none', color: 'red', fontWeight: 'bold', fontSize: '18px', padding: '10px', borderRadius: '5px' }} onClick={handleLogout} className="btn btn-link">
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <a style={{ textDecoration: 'none', color: 'purple', fontWeight: 'bold', fontSize: '18px', padding: '10px', borderRadius: '5px' }} href="" onClick={handleLogin}>
-                  Login
-                </a>
-              )}
-            </Navbar.Text>
+            <Navbar.Brand href="/">
+              <Logo />
+            </Navbar.Brand>
+            <Dropdown align="end" drop="start">
+              <Dropdown.Toggle as="div" style={{ backgroundColor: 'grey', borderRadius: '50%', padding: '5px' }}>
+                <PersonCircle size={30} color="white" />
+              </Dropdown.Toggle>
+              <Dropdown.Menu className="custom-dropdown-menu">
+                {user ? (
+                  <>
+                    <Dropdown.ItemText>{user}</Dropdown.ItemText>
+                    <Dropdown.Item className="custom-dropdown-item logout-item" onClick={handleLogout}>Logout</Dropdown.Item>
+                  </>
+                ) : (
+                  <Dropdown.Item className="custom-dropdown-item" onClick={handleLogin}>Login</Dropdown.Item>
+                )}
+              </Dropdown.Menu>
+            </Dropdown>
           </Navbar.Collapse>
         </Container>
       </Navbar>

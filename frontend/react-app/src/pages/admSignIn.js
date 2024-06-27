@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import "../distcss/signin.css";
+import "../distcss/admsignin.css";
 
 const AdmsignIn = () => {
   const [formData, setFormData] = useState({
@@ -39,8 +39,8 @@ const AdmsignIn = () => {
   };
 
   return (
-    <div className="sign-in">
-      <div className="content">
+    <div className="sign-in" style={{ backgroundImage: `url(${require('../img/backgroundbook.png')})`, backgroundAttachment: 'fixed' }}>
+      <div className="content cormorant-font">
         <div className="title">Login As Admin</div>
         <form onSubmit={handleSubmit}>
           <div className="email-input">
@@ -75,6 +75,13 @@ const AdmsignIn = () => {
           <Link to="/admin/register" className="sign-up-link">Sign Up</Link>
         </div>
       </div>
+      <button 
+          className="user-login-button" 
+          onClick={() => navigate('/signin')}
+          style={{ position: 'absolute', top: '10px', right: '10px' }}
+        >
+          Login as Admin
+        </button>
     </div>
   );
 };

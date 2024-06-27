@@ -9,6 +9,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { format, addDays } from 'date-fns';
 import Appnavbar from '../compunents/navbar';
 import useUserAuth from '../utils/useUserAuth';
+import '../distcss/booking.css';
 
 const Tab = () => {
   useUserAuth();
@@ -133,71 +134,78 @@ const Tab = () => {
   return (
     <div>
       <Appnavbar />
-      <div style={{ padding: '2rem' }}>
+    <div className="booking-container" style={{ backgroundImage: `url(${require('../img/backgroundbook.png')})` }}>
+            
+      <div className="booking-form cormorant-font">
+        <h2>Book your table now</h2>
         <Form onSubmit={handleBook}>
-          <Table striped bordered hover>
-            <tbody>
-              <tr>
-                <td>Nomor meja</td>
-                <td>{table.nomor_meja}</td>
-              </tr>
-              <tr>
-                <td>Kapasitas</td>
-                <td>{table.kapasitas}</td>
-              </tr>
-              <tr>
-                <td>Jumlah Pengunjung</td>
-                <td>
-                  <InputGroup className="mb-3">
-                    <Form.Control
-                      type="text"
-                      pattern="[0-9]*"
-                      placeholder="Jumlah Pengunjung"
-                      aria-label="Jumlah Pengunjung"
-                      aria-describedby="jumlah-pengunjung"
-                      name="jumlah_orang"
-                      value={formData.jumlah_orang}
-                      onChange={handleChange}
-                      min="1"
-                      max={table.kapasitas}
-                    />
-                    <InputGroup.Text id="jumlah-pengunjung">/{table.kapasitas}</InputGroup.Text>
-                  </InputGroup>
-                </td>
-              </tr>
-              <tr>
-                <td>Tanggal</td>
-                <td>
-                  <Form.Control
-                    as="select"
-                    name="tanggal_reservasi"
-                    value={formData.tanggal_reservasi}
-                    onChange={handleChange}
-                  >
-                    {renderDateOptions()}
-                  </Form.Control>
-                </td>
-              </tr>
-              <tr>
-                <td>Waktu</td>
-                <td>
-                  <Form.Control
-                    type="time"
-                    name="waktu_reservasi"
-                    value={formData.waktu_reservasi}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-          <Button type="submit" variant="primary" disabled={isButtonDisabled}>
-            Book Table
+          <div className="form-group">
+          <label className="form-label">Nomor Meja</label>
+          <Form.Control
+              type="text"
+              name="nomor_meja"
+              placeholder="Nomor Meja"
+              className="form-control"
+              value={table.nomor_meja}
+              readOnly
+            />
+          </div>
+          <div className="form-group">
+          <label className="form-label">Kapasitas</label>
+            <Form.Control
+              type="text"
+              name="kapasitas"
+              placeholder="Kapasitas"
+              className="form-control"
+              value={table.kapasitas}
+              readOnly
+            />
+          </div>
+          <div className="form-group">
+          <label className="form-label">Jumlah Pengunjung</label>
+            <Form.Control
+              type="number"
+              name="jumlah_orang"
+              placeholder="Person"
+              className="form-control"
+              value={formData.jumlah_orang}
+              onChange={handleChange}
+              min="1"
+              max={maxPengunjung}
+            />
+          </div>
+          <div className="form-group">
+          <label className="form-label">Waktu</label>
+            <Form.Control
+              type="time"
+              name="waktu_reservasi"
+              placeholder="Timing"
+              className="form-control"
+              value={formData.waktu_reservasi}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+          <label className="form-label">Tanggal</label>
+            <Form.Control
+              as="select"
+              name="tanggal_reservasi"
+              className="form-control"
+              value={formData.tanggal_reservasi}
+              onChange={handleChange}
+            >
+              {renderDateOptions()}
+            </Form.Control>
+          </div>
+          <Button type="submit" variant="primary" className="btn-primary" disabled={isButtonDisabled}>
+            <strong>Book a Table</strong>
           </Button>
         </Form>
       </div>
+    </div>
     </div>
   );
 };
 
 export default Tab;
+     
