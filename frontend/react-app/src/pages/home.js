@@ -202,11 +202,6 @@ const Home = () => {
           ))}
         </div>
       )}
-              <div style={{ marginTop: '20px' }}>
-                <footer style={{ bottom: '0', width: '100%' }}>
-                  <img src={imagee} alt="Footer" style={{ width: '100%' }} />
-                </footer>
-              </div>
    
     </div>
   );
