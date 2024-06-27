@@ -364,7 +364,7 @@ const Admhome = () => {
               <Form.Group controlId="formNamaMenu">
                 <Form.Label>Nama Menu</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="text"inMinutes
                   placeholder="Enter menu name"
                   name="nama_menu"
                   value={newMenuData.nama_menu}
