@@ -314,12 +314,6 @@ const Admhome = () => {
                     <td>
                       <Button
                         style={{ marginRight: '0.5rem' }}
-                        variant="success"
-                        onClick={() => handleBook(table.table_id)}>
-                        See Table
-                      </Button>
-                      <Button
-                        style={{ marginRight: '0.5rem' }}
                         disabled={status[table.table_id] === 1}
                         variant="warning"
                         onClick={() => handleShowEditTableModal(table)}>

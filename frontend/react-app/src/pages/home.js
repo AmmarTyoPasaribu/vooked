@@ -125,7 +125,7 @@ const Home = () => {
                 </Card.Text>
                     {isLoggedIn && (
               <Button variant="primary" className="view-menu-button" onClick={() => handleTable(restaurant)}>
-              View Menu
+              View Table
             </Button>
                     )}
                   </Card.Body>
@@ -153,7 +153,7 @@ const Home = () => {
               {userReservations.map((reservation) => (
                 <Card key={reservation.reservation_id} style={{ width: '18rem' }}>
                   <Card.Body>
-                    <Card.Title>Reservation ID: {reservation.restaurant_name}</Card.Title>
+                    <Card.Title>{reservation.restaurant_name}</Card.Title>
                     <Card.Text>
                       Restaurant ID: {reservation.restaurant_id}<br />
                       Table ID: {reservation.table_id}<br />
