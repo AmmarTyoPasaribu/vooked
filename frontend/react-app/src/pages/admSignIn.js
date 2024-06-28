@@ -80,7 +80,7 @@ const AdmsignIn = () => {
           onClick={() => navigate('/signin')}
           style={{ position: 'absolute', top: '10px', right: '10px' }}
         >
-          Login as Admin
+          Login as User
         </button>
     </div>
   );
